@@ -1,0 +1,24 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+
+# IDE / Editor files
+.vscode/
+.idea/
+
+# Agent / AI Configuration
+.agents/
+.claude/
+.mcp.json
+
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
