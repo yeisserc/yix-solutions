@@ -1,38 +1,34 @@
-// Custom Cursor
-const cursorDot = document.querySelector('.cursor-dot');
-const cursorOutline = document.querySelector('.cursor-outline');
-
-// Only initialize custom cursor on non-touch devices
-if (window.matchMedia('(pointer: fine)').matches) {
-    window.addEventListener('mousemove', (e) => {
-        const posX = e.clientX;
-        const posY = e.clientY;
-
-        // Animate dot instantly
-        cursorDot.style.transform = `translate(${posX}px, ${posY}px)`;
-        
-        // Animate outline with slight delay for smooth effect
-        cursorOutline.animate({
-            transform: `translate(${posX}px, ${posY}px)`
-        }, { duration: 500, fill: 'forwards' });
-    });
-
-    // Add hover effect for links and buttons
-    const hoverElements = document.querySelectorAll('a, button, .service-card');
-    
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursorOutline.classList.add('hover');
-        });
-        
-        el.addEventListener('mouseleave', () => {
-            cursorOutline.classList.remove('hover');
-        });
-    });
-}
-
 // Navbar Scroll Effect
 const navbar = document.querySelector('.navbar');
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const mobileMenuIcon = mobileMenuBtn?.querySelector('i');
+const mobileMenuLinks = document.querySelectorAll('.nav-links .nav-link, .nav-actions a');
+
+const setMobileMenuState = (isOpen) => {
+    if (!navbar || !mobileMenuBtn || !mobileMenuIcon) return;
+
+    navbar.classList.toggle('menu-open', isOpen);
+    mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+    mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+    mobileMenuIcon.className = isOpen ? 'ph ph-x' : 'ph ph-list';
+};
+
+if (mobileMenuBtn && navbar) {
+    mobileMenuBtn.addEventListener('click', () => {
+        const isOpen = navbar.classList.contains('menu-open');
+        setMobileMenuState(!isOpen);
+    });
+
+    mobileMenuLinks.forEach((link) => {
+        link.addEventListener('click', () => setMobileMenuState(false));
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            setMobileMenuState(false);
+        }
+    });
+}
 
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
