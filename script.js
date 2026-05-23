@@ -84,3 +84,59 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Contact Form
+const contactForm = document.querySelector('[data-contact-form]');
+const contactFormStatus = document.querySelector('[data-form-status]');
+const formStartedAtField = document.querySelector('[data-form-started-at]');
+
+if (formStartedAtField) {
+    formStartedAtField.value = String(Date.now());
+}
+
+if (contactForm && contactFormStatus) {
+    contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const formData = new FormData(contactForm);
+        const payload = Object.fromEntries(formData.entries());
+
+        contactFormStatus.textContent = 'Enviando mensaje...';
+        contactFormStatus.className = 'form-status';
+
+        if (submitButton) {
+            submitButton.disabled = true;
+        }
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.ok) {
+                throw new Error(result.message || 'No se pudo enviar el formulario.');
+            }
+
+            contactForm.reset();
+            if (formStartedAtField) {
+                formStartedAtField.value = String(Date.now());
+            }
+            contactFormStatus.textContent = result.message;
+            contactFormStatus.classList.add('is-success');
+        } catch (error) {
+            contactFormStatus.textContent = error.message || 'Ha ocurrido un error al enviar el formulario.';
+            contactFormStatus.classList.add('is-error');
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+            }
+        }
+    });
+}

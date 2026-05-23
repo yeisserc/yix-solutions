@@ -300,10 +300,27 @@
                     <p class="cta-desc">Cuéntanos qué necesitas — web, IA, software o marketing — y te respondemos con una propuesta clara.</p>
                 </div>
                 <div class="cta-form-container">
-                    <form class="glass-form">
-                        <div class="form-group">
-                            <input type="email" placeholder="Tu email" class="form-input" required>
+                    <form class="glass-form" data-contact-form>
+                        <div class="form-honeypot" aria-hidden="true">
+                            <label for="company">Empresa</label>
+                            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
                         </div>
+                        <input type="hidden" name="formStartedAt" value="" data-form-started-at>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <input type="text" placeholder="Tu nombre" class="form-input" name="name" autocomplete="name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Tu email" class="form-input" name="email" autocomplete="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Tu teléfono" class="form-input" name="phone" autocomplete="tel">
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Cuéntanos qué necesitas" class="form-input form-textarea" name="message" rows="5" required></textarea>
+                        </div>
+                        <p class="form-status" data-form-status aria-live="polite"></p>
                         <button type="submit" class="btn btn-primary btn-block">
                             <span>Enviar mensaje</span>
                             <i class="ph ph-paper-plane-right"></i>
@@ -324,6 +341,7 @@
                         <div class="logo-dot"></div>
                     </a>
                     <p class="footer-tagline">Webs, IA, software y marketing digital a medida.</p>
+                    <a href="mailto:contacto@yixsolutions.com" class="footer-contact">contacto@yixsolutions.com</a>
                 </div>
                 <div class="footer-links">
                     <h4>Servicios</h4>
@@ -341,8 +359,9 @@
                 </div>
                 <div class="footer-links">
                     <h4>Legal</h4>
-                    <a href="#">Politica de privacidad</a>
-                    <a href="#">Terminos de servicio</a>
+                    <a href="politica-privacidad.html">Politica de privacidad</a>
+                    <a href="condiciones-servicio.html">Condiciones del servicio</a>
+                    <a href="eliminacion-datos.html">Eliminación de datos</a>
                 </div>
             </div>
             <div class="footer-bottom">

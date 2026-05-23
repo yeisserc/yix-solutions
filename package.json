@@ -1,0 +1,13 @@
+{
+  "name": "yixsolutions-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing y páginas legales de YixSolutions con backend mínimo para contacto.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemailer": "^8.0.7"
+  }
+}
