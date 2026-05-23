@@ -73,9 +73,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            // Adjust offset for fixed navbar
-            const navHeight = document.querySelector('.navbar').offsetHeight;
-            const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY;
             
             window.scrollTo({
                 top: targetPosition,
